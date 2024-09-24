@@ -13,9 +13,6 @@ int leConverteValor() {
 
     valor = centena * 100 + dezena * 10 + unidade;
     
-    if(valor > 999){
-    valor/10;
-    }
     return valor;
 }
 
