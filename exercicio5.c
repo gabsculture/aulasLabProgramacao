@@ -29,6 +29,7 @@ void imprimeValorBinario(int valor) {
     putchar(codigo);
     codigo = unidade + '0';
     putchar(codigo);
+    putchar('\n');
 
 }
 
@@ -46,6 +47,7 @@ void imprimeValorDecimal(int valor) {
     putchar(codigo);
     codigo = unidade + '0';
     putchar(codigo);
+    putchar('\n');
 }
 
 
