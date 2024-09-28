@@ -1,3 +1,9 @@
+Repositório com a resolução dos exercícios da disciplina de Laboratório de Programação I.
+
+
+
+Legenda dos exercícios:
+
 1. Altere o programa para calcular a média de 3 números lidos.
 2. Na forma como está o programa, devemos digitar os números grudados, cada um com 3 dígitos. Por exemplo, para calcular a média de 7, 244 e 125 com o programa acima, devemos digitar 007244125. Altere a função leval para que ela leia um caractere a mais e o ignore, permitindo que se digite cada número em uma linha.
 3. Altere o programa para que ele leia um só número, e imprima dois, o dobro e o quadrado do número lido.
