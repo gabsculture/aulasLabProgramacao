@@ -10,3 +10,7 @@ Legenda dos exercícios:
 4. Altere a função de impressão de número, para que ela pule para a linha seguinte após imprimir o número, para nnão ficar tudo grudado quando se imprime mais de um número.
 5. Faça uma função para imprimir um número em binário, com 8 dígitos
 6. Faça uma função que recebe 2 argumentos, um representando o peso de uma pessoa em kg e outro que representa sua altura em cm. A função deve retornar o IMC da pessoa. Faça um programa que usa essa função para imprimir o IMC de uma pessoa, considerando o peso e a altura digitados.
+
+ Aula 6: 
+1. Faça um programa que lê a idade de uma
+pessoa em anos e imprime a idade aproximada em dias. Use dados int.
