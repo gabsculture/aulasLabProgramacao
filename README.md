@@ -14,3 +14,4 @@ Legenda dos exercícios:
  Aula 6: 
 1. Faça um programa que lê a idade de uma
 pessoa em anos e imprime a idade aproximada em dias. Use dados int.
+2. Faça um programa que lê o preço de um litro de combustível, o consumo do veículo em km/l e a distância a percorrer, e calcula e imprime o custo em reais do combustível para percorrer essa distância. Use variáveis float; imprima o valor em reais com 2 casas, para representar os centavos. Informe ao usuário o que é o valor que se espera que ele digite a cada vez (para não ficar só a tela preta e o usuário tendo que conhecer a ordem em que os dados devem ser digitados).
