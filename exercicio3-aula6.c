@@ -21,6 +21,8 @@ int main()
 	scanf("%f", &aut);
 	printf("insira a distância a percorrer em km:");
 	scanf("%f", &dist);
+
+	///***falta o calculo!!!!!!!!!!**///////
 	
 	custo= custoReais();
 	printf("custo:%.2f", custo);
