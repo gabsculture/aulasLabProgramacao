@@ -121,21 +121,61 @@ void imprimeFiguraH(char caractere, int altura) {
         } else if (numeroEspacos >= 1 && linha != altura - 1) {
             int numeroEspacosEntreCaracteres = altura - linha - 1;
             int numeroCaracteresPorLado = numeroCaracteres / 2;
-            imprimeCaracteres(numeroCaracteresPorLado, caractere);
-            imprimeCaracteres(numeroEspacosEntreCaracteres, ' ');
-            imprimeCaracteres(numeroCaracteresPorLado, caractere);
-            printf("\n");
-        } else if (numeroCaracteres % 2 != 0 && linha == altura - 1) {
-            int numeroCaracteresPorLado = ((numeroCaracteres - 1) / 2) - 2;
+            if ((numeroCaracteres - 1) % 2 != 0 && linha == altura) {
+                numeroEspacosEntreCaracteres = altura - linha + 1;
+                imprimeCaracteres(1, caractere);
+                imprimeCaracteres(numeroEspacosEntreCaracteres, ' ');
+                imprimeCaracteres(numeroCaracteresPorLado, caractere);
+                imprimeCaracteres(numeroEspacosEntreCaracteres, ' ');
+                imprimeCaracteres(1, caractere);
+                printf("\n");
+            } else {
+                imprimeCaracteres(numeroCaracteresPorLado, caractere);
+                imprimeCaracteres(numeroEspacosEntreCaracteres, ' ');
+                imprimeCaracteres(numeroCaracteresPorLado, caractere);
+                printf("\n");
+            }
+        } else if ((numeroCaracteres - 1) % 2 != 0) {
+            int numeroCaracteresPorLado = (numeroCaracteres - 1) / 2;
             int numeroEspacosEntreCaracteres = altura - linha;
-            imprimeCaracteres(1, caractere);
-            imprimeCaracteres(numeroEspacosEntreCaracteres, ' ');
             imprimeCaracteres(numeroCaracteresPorLado, caractere);
             imprimeCaracteres(numeroEspacosEntreCaracteres, ' ');
             imprimeCaracteres(1, caractere);
+            imprimeCaracteres(numeroEspacosEntreCaracteres, ' ');
+            imprimeCaracteres(numeroCaracteresPorLado, caractere);
             printf("\n");
-        } else if ((numeroCaracteres-1) % 2 != 0) {
-            int numeroCaracteresPorLado = (numeroCaracteres - 1)/ 2;
+        } else {
+            imprimeCaracteres(numeroEspacos, ' ');
+            imprimeCaracteres(numeroCaracteres, caractere);
+            printf("\n");
+        }
+    }
+    for (int linha = altura - 2; linha >= 0; linha--) {
+        int numeroEspacos = 2 * linha + 1;
+        int numeroCaracteres = altura * 2;
+        if (linha == 0) {
+            numeroCaracteres = altura * 2 + 1;
+            imprimeCaracteres(numeroCaracteres, caractere);
+            printf("\n");
+        } else if (numeroEspacos >= 1 && linha != altura - 1) {
+            int numeroEspacosEntreCaracteres = altura - linha - 1;
+            int numeroCaracteresPorLado = numeroCaracteres / 2;
+            if ((numeroCaracteres - 1) % 2 != 0 && linha == altura) {
+                numeroEspacosEntreCaracteres = altura - linha + 1;
+                imprimeCaracteres(1, caractere);
+                imprimeCaracteres(numeroEspacosEntreCaracteres, ' ');
+                imprimeCaracteres(numeroCaracteresPorLado, caractere);
+                imprimeCaracteres(numeroEspacosEntreCaracteres, ' ');
+                imprimeCaracteres(1, caractere);
+                printf("\n");
+            } else {
+                imprimeCaracteres(numeroCaracteresPorLado, caractere);
+                imprimeCaracteres(numeroEspacosEntreCaracteres, ' ');
+                imprimeCaracteres(numeroCaracteresPorLado, caractere);
+                printf("\n");
+            }
+        } else if ((numeroCaracteres - 1) % 2 != 0) {
+            int numeroCaracteresPorLado = (numeroCaracteres - 1) / 2;
             int numeroEspacosEntreCaracteres = altura - linha;
             imprimeCaracteres(numeroCaracteresPorLado, caractere);
             imprimeCaracteres(numeroEspacosEntreCaracteres, ' ');
@@ -178,54 +218,54 @@ int main() {
 
     switch (opcaoFigura) {
         case 'a':
-            //caractereDesenho = escolheCaractere();
-            //quantidadeLinhas = escolheQuantidadeLinhas();
-            imprimeFiguraA('*', 3);
+            caractereDesenho = escolheCaractere();
+            quantidadeLinhas = escolheQuantidadeLinhas();
+            imprimeFiguraA(caractereDesenho, quantidadeLinhas);
             break;
 
         case 'b':
-            //caractereDesenho = escolheCaractere();
-            //quantidadeLinhas = escolheQuantidadeLinhas();
-            imprimeFiguraB('*', 3);
+            caractereDesenho = escolheCaractere();
+            quantidadeLinhas = escolheQuantidadeLinhas();
+            imprimeFiguraB(caractereDesenho, quantidadeLinhas);
             break;
 
         case 'c':
-            //caractereDesenho = escolheCaractere();
-            //quantidadeLinhas = escolheQuantidadeLinhas();
-            imprimeFiguraC('*', 3);
+            caractereDesenho = escolheCaractere();
+            quantidadeLinhas = escolheQuantidadeLinhas();
+            imprimeFiguraC(caractereDesenho, quantidadeLinhas);
             break;
 
         case 'd':
-            //caractereDesenho = escolheCaractere();
-            //quantidadeLinhas = escolheQuantidadeLinhas();
-            imprimeFiguraD('*', 3);
+            caractereDesenho = escolheCaractere();
+            quantidadeLinhas = escolheQuantidadeLinhas();
+            imprimeFiguraD(caractereDesenho, quantidadeLinhas);
             break;
 
         case 'e':
-            //caractereDesenho = escolheCaractere();
-            //quantidadeLinhas = escolheQuantidadeLinhas();
-            imprimeFiguraE('*', 3);
+            caractereDesenho = escolheCaractere();
+            quantidadeLinhas = escolheQuantidadeLinhas();
+            imprimeFiguraE(caractereDesenho, quantidadeLinhas);
             break;
 
         case 'f':
-            //caractereDesenho = escolheCaractere();
-            //quantidadeLinhas = escolheQuantidadeLinhas();
-            imprimeFiguraF('*', 3);
+            caractereDesenho = escolheCaractere();
+            quantidadeLinhas = escolheQuantidadeLinhas();
+            imprimeFiguraF(caractereDesenho, quantidadeLinhas);
             break;
 
         case 'g':
-            //caractereDesenho = escolheCaractere();
-            //quantidadeLinhas = escolheQuantidadeLinhas();
-            imprimeFiguraG('*', 3);
+            caractereDesenho = escolheCaractere();
+            quantidadeLinhas = escolheQuantidadeLinhas();
+            imprimeFiguraG(caractereDesenho, quantidadeLinhas);
             break;
 
         case 'h':
-            //caractereDesenho = escolheCaractere();
-            //quantidadeLinhas = escolheQuantidadeLinhas();
-            imprimeFiguraH('*', 3);
+            caractereDesenho = escolheCaractere();
+            quantidadeLinhas = escolheQuantidadeLinhas();
+            imprimeFiguraH(caractereDesenho, quantidadeLinhas);
             break;
 
         case 'z':
-            printf("Tchau!");
+            exit(0);
     }
 }
