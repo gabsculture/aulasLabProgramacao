@@ -57,6 +57,7 @@ bool processa_entrada(char tabuleiro[], int tamanho, int *linha_cursor, int *col
                 if (tabuleiro[index] == '.') {
                     tabuleiro[index] = 'x';
                     t_atualiza();
+                    
                 } else if (tabuleiro[index] == 'x') {
 
                     tabuleiro[index] = '.';
@@ -191,6 +192,7 @@ int main() {
     int linha_destaque, coluna_destaque;
     int linha_cursor = 1, coluna_cursor = 1;
     double ultima_mexida;
+    int validarTabuleiro = 0;
 
 
     linha_destaque = 2 + rand() % (nlin - 4);
@@ -216,32 +218,47 @@ int main() {
     desenha_tabuleiro(numeroRainhas, tabuleiro, linha_cursor, coluna_cursor);
 
     while (!fim) {
+            desenha_tabuleiro(numeroRainhas, tabuleiro, linha_cursor, coluna_cursor);
         fim = processa_entrada(tabuleiro, numeroRainhas, &linha_cursor, &coluna_cursor, &contadorRainhas, &validando);
 
         if (t_relogio() - ultima_mexida >= 8.2) {
             linha_destaque = 2 + rand() % (nlin - 4);
             coluna_destaque = 2 + rand() % (ncol - 4);
-            ultima_mexida = t_relogio(); // Atualiza o tempo da última mudança
+            ultima_mexida = t_relogio(); 
         }
 
         if (validando) {
-            if (contadorRainhas == numeroRainhas) {
+            if(contadorRainhas == numeroRainhas) {
+            validarTabuleiro = 1;
+            }
+            else {
+            validarTabuleiro = 2;
+            }
+            
+        }
+    }
+    t_finaliza();
+    
+    if (validarTabuleiro = 1) {
+        if (verificaTabuleiro(numeroRainhas, tamanhoTabuleiro, tabuleiro)){
+            printf("\n Parabéns! Você completou o desafio \n");
+        } else {
+            printf("\n Tabuleiro inválido! \n");
+        }
+    }
+    if (!validando) {
+        printf("\nPrograma encerrado pelo usuário.\n");
+
+    free(tabuleiro);
+
+    return 0;
+}
+}
+/*           if (contadorRainhas == numeroRainhas) {
                 if (verificaTabuleiro(numeroRainhas, tamanhoTabuleiro, tabuleiro)) {
                     printf("\nParabéns! Você completou o desafio!\n");
                 }
             } else {
                 printf("\nTabuleiro inválido!\n");
             }
-            break;
-        }
-    }
-
-    if (!validando) {
-        printf("\nPrograma encerrado pelo usuário.\n");
-    }
-    t_finaliza();
-
-    free(tabuleiro);
-
-    return 0;
-}
+            break;*/
