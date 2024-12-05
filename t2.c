@@ -188,6 +188,7 @@ int retornaEstado(int numero, int tamanhoTabuleiro, char tabuleiro[]) {
     }
 }
 
+
 int main() {
     bool fim = false;
     bool abortado = false;
@@ -198,14 +199,14 @@ int main() {
     linha_destaque = 2 + rand() % (nlin - 4);
     coluna_destaque = 2 + rand() % (ncol - 4);
     int numeroRainhas = recebeNumeroRainhas();
-    int tamanhoTabuleiro = numeroRainhas * numeroRainhas;
+    int tamanhoTabuleiro = numeroRainhas * numeroRainhas
     char *tabuleiro = inicializaTabuleiro(tamanhoTabuleiro);
     int estado = 0;
+
     t_inicializa();
 
     t_tamanho(&nlin, &ncol);
     ultima_mexida = t_relogio();
-    printf("%d", estado);
 
     if (tabuleiro == NULL) {
         t_finaliza();
@@ -213,7 +214,6 @@ int main() {
     }
 
     desenha_tabuleiro(numeroRainhas, tabuleiro, linha_cursor, coluna_cursor);
-
 
     while (!fim && !abortado) {
         estado = retornaEstado(numeroRainhas, tamanhoTabuleiro, tabuleiro);
@@ -227,24 +227,28 @@ int main() {
         if(verificaQuantidadeRainhas(numeroRainhas, tabuleiro)){
             fim = true;
         }
-
     }
         if(fim) {
         if (verificaTabuleiro(numeroRainhas, tamanhoTabuleiro, tabuleiro)) {
-            printf("divou");
+            printf("divou em %d", ultima_mexida);
+            printf("Digite ENTER para encerrar o programa\n");
+
         } else {
             printf("flopou");
+            printf("Digite ENTER para encerrar o programa\n");
+
         }
     } else {
         printf("jogo finalizado pelo usuario");
+        printf("Digite ENTER para encerrar o programa\n");
+    }
+
+    t_atualiza();
+
+    while(t_tecla() != '\n') {
     }
 
     t_finaliza();
-
-
-
     free(tabuleiro);
-
     return 0;
 }
-
