@@ -5,11 +5,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+//Adicionar borda, adicionar parametro estado para alteração de cores na borda
 void desenha_tabuleiro(int tamanho, char tabuleiro[], int linha_destaque, int coluna_destaque) {
     int cor_fundo_clara[] = {220, 220, 220};
     int cor_fundo_escura[] = {100, 100, 100};
     int cor_destaque[] = {0, 255, 0};
 
+    t_limpa();
     for (int linha = 1; linha <= tamanho; linha++) {
         for (int coluna = 1; coluna <= tamanho; coluna++) {
             int *cor_atual;
@@ -24,6 +26,7 @@ void desenha_tabuleiro(int tamanho, char tabuleiro[], int linha_destaque, int co
             t_cor_fundo(cor_atual[0], cor_atual[1], cor_atual[2]);
             printf(" %c", tabuleiro[(linha - 1) * tamanho + (coluna - 1)]);
         }
+        t_cor_normal();
         printf("\n");
     }
     t_cor_normal();
@@ -31,8 +34,7 @@ void desenha_tabuleiro(int tamanho, char tabuleiro[], int linha_destaque, int co
 }
 
 
-bool processa_entrada(char tabuleiro[], int tamanho, int *linha_cursor, int *coluna_cursor, int *contadorRainhas,
-                      bool *validando) {
+bool processa_entrada(char tabuleiro[], int tamanho, int *linha_cursor, int *coluna_cursor) {
     int nlin, ncol;
     t_tamanho(&nlin, &ncol);
     if (t_tem_tecla()) {
@@ -59,26 +61,14 @@ bool processa_entrada(char tabuleiro[], int tamanho, int *linha_cursor, int *col
                     t_atualiza();
                     
                 } else if (tabuleiro[index] == 'x') {
-
                     tabuleiro[index] = '.';
                     t_atualiza();
-                }
-                *contadorRainhas = 0;
-                for (int i = 0; i < tamanho * tamanho; i++) {
-                    if (tabuleiro[i] == 'x') {
-                        (*contadorRainhas)++;
-                    }
-
-                }
-                if (*contadorRainhas == tamanho) {
-                    *validando = true;
                 }
                 break;
             case 'x':
                 return true;
             }
         }
-
         return false;
     }
 }
@@ -186,29 +176,36 @@ char *inicializaTabuleiro(int tamanhoTabuleiro) {
     return tabuleiro;
 }
 
+int retornaEstado(int numero, int tamanhoTabuleiro, char tabuleiro[]) {
+    if (verificaQuantidadeRainhas) {
+        if (verificaTabuleiro) {
+            return 2;
+        } else {
+            return 1;
+        }
+    } else {
+        return 0;
+    }
+}
+
 int main() {
     bool fim = false;
+    bool abortado = false;
     int nlin, ncol;
     int linha_destaque, coluna_destaque;
     int linha_cursor = 1, coluna_cursor = 1;
     double ultima_mexida;
-    int validarTabuleiro = 0;
-
-
     linha_destaque = 2 + rand() % (nlin - 4);
     coluna_destaque = 2 + rand() % (ncol - 4);
-
-
     int numeroRainhas = recebeNumeroRainhas();
     int tamanhoTabuleiro = numeroRainhas * numeroRainhas;
     char *tabuleiro = inicializaTabuleiro(tamanhoTabuleiro);
-    int contadorRainhas = 0;
-    bool validando = false;
-
+    int estado = 0;
     t_inicializa();
 
     t_tamanho(&nlin, &ncol);
     ultima_mexida = t_relogio();
+    printf("%d", estado);
 
     if (tabuleiro == NULL) {
         t_finaliza();
@@ -217,48 +214,37 @@ int main() {
 
     desenha_tabuleiro(numeroRainhas, tabuleiro, linha_cursor, coluna_cursor);
 
-    while (!fim) {
-            desenha_tabuleiro(numeroRainhas, tabuleiro, linha_cursor, coluna_cursor);
-        fim = processa_entrada(tabuleiro, numeroRainhas, &linha_cursor, &coluna_cursor, &contadorRainhas, &validando);
 
+    while (!fim && !abortado) {
+        estado = retornaEstado(numeroRainhas, tamanhoTabuleiro, tabuleiro);
+        desenha_tabuleiro(numeroRainhas, tabuleiro, linha_cursor, coluna_cursor);
+        abortado = processa_entrada(tabuleiro, numeroRainhas, &linha_cursor, &coluna_cursor);
         if (t_relogio() - ultima_mexida >= 8.2) {
             linha_destaque = 2 + rand() % (nlin - 4);
             coluna_destaque = 2 + rand() % (ncol - 4);
             ultima_mexida = t_relogio(); 
         }
+        if(verificaQuantidadeRainhas(numeroRainhas, tabuleiro)){
+            fim = true;
+        }
 
-        if (validando) {
-            if(contadorRainhas == numeroRainhas) {
-            validarTabuleiro = 1;
-            }
-            else {
-            validarTabuleiro = 2;
-            }
-            
-        }
     }
-    t_finaliza();
-    
-    if (validarTabuleiro = 1) {
-        if (verificaTabuleiro(numeroRainhas, tamanhoTabuleiro, tabuleiro)){
-            printf("\n Parabéns! Você completou o desafio \n");
+        if(fim) {
+        if (verificaTabuleiro(numeroRainhas, tamanhoTabuleiro, tabuleiro)) {
+            printf("divou");
         } else {
-            printf("\n Tabuleiro inválido! \n");
+            printf("flopou");
         }
+    } else {
+        printf("jogo finalizado pelo usuario");
     }
-    if (!validando) {
-        printf("\nPrograma encerrado pelo usuário.\n");
+
+    t_finaliza();
+
+
 
     free(tabuleiro);
 
     return 0;
 }
-}
-/*           if (contadorRainhas == numeroRainhas) {
-                if (verificaTabuleiro(numeroRainhas, tamanhoTabuleiro, tabuleiro)) {
-                    printf("\nParabéns! Você completou o desafio!\n");
-                }
-            } else {
-                printf("\nTabuleiro inválido!\n");
-            }
-            break;*/
+
